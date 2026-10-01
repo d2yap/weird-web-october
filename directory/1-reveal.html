@@ -5,65 +5,62 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>1 - Reveal</title>
     <link rel="stylesheet" href="../css/1-reveal.css" />
+    <script src="../js/1-reveal.js" defer></script>
   </head>
   <body>
     <main class="layout">
-      <h1 class="layout__header">Cactpot!</h1>
-      <h2>Click on a tile to reveal~</h2>
-      <div class="grid" id="grid" aria-label="Reveal grid"></div>
+      <p class="go_back"><a href="../index.html"><< To Directory</a></p>
+      <h1 class="layout__header">Mini Cactpot!</h1>
+      <div class="layout__heading2">
+        <h2>Click on a tile to reveal</h2>
+        <p>Tries: <span id="tries">3</span></p>
+      </div>
+
+      <div class="board__diags" aria-label="Choose a diagonal" role="group">
+        <button class="line-btn board__diag" type="button" data-line="diag0">
+          Diag &#8600;
+        </button>
+        <button class="line-btn board__diag" type="button" data-line="diag1">
+          Diag &#8599;
+        </button>
+      </div>
+
+      <div class="board">
+        <div
+          class="board__rows"
+          id="row-chooser"
+          role="group"
+          aria-label="Choose a row"
+        >
+          <button class="line-btn" type="button" data-line="row0">Row 1</button>
+          <button class="line-btn" type="button" data-line="row1">Row 2</button>
+          <button class="line-btn" type="button" data-line="row2">Row 3</button>
+        </div>
+
+        <div class="grid" id="grid" aria-label="Reveal grid"></div>
+
+        <div
+          class="board__cols"
+          id="col-chooser"
+          role="group"
+          aria-label="Choose a column"
+        >
+          <button class="line-btn" type="button" data-line="col0">Col 1</button>
+          <button class="line-btn" type="button" data-line="col1">Col 2</button>
+          <button class="line-btn" type="button" data-line="col2">Col 3</button>
+        </div>
+      </div>
+
+      <section class="chooser" aria-label="Line chooser">
+        <div class="chooser__direction">
+          <button class="submit-btn" type="button" id="submit-line">
+            Submit Line
+          </button>
+          <button class="replay-btn" type="button" id="replay">Replay</button>
+        </div>
+      </section>
+
+      <div class="mgp_count"><span id="score">0</span> MGP</div>
     </main>
-
-    <script>
-      //Cactpot script
-      const grid = document.getElementById("grid");
-      const tiles = [];
-      let tries = 3;
-
-      let numbers = [];
-      // generate a list of numbers
-      for (let i = 1; i < 10; i++) {
-        numbers.push(i);
-      }
-
-      console.log(numbers);
-
-      for (let i = 0; i < 9; i++) {
-        const tile = document.createElement("button");
-        tile.className = "tile";
-        tile.type = "button";
-        tile.setAttribute("aria-pressed", "false");
-        tile.setAttribute("aria-label", `Tile ${i + 1}`);
-        tile.innerHTML = `
-                <span class="tile__inner">
-                    <span class="tile__face tile__face--front">?</span>
-                    <span class="tile__face tile__face--back">${i + 1}</span>
-                </span>`;
-
-        tile.addEventListener("click", () => {
-          if (tries > 0) {
-            const revealed = tile.getAttribute("aria-pressed") === "true";
-            tile.setAttribute("aria-pressed", String("true"));
-            if (!revealed) {
-              tries--;
-            }
-          }
-        });
-
-        grid.appendChild(tile);
-        tiles.push(tile);
-      }
-
-      getTwo();
-
-      function getTwo() {
-        const picks = [...tiles].sort(() => Math.random() - 0.5).slice(0, 2);
-
-        picks.forEach((tile) => {
-          tile.setAttribute("aria-pressed", "true");
-        });
-
-        console.log(picks.map((tile) => tile.getAttribute("aria-label")));
-      }
-    </script>
   </body>
 </html>

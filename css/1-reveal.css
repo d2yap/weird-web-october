@@ -17,6 +17,21 @@ body {
   color: #eee;
 }
 
+.go_back {
+  position: absolute;
+  font-weight: bold;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  left: 1rem;
+  top: 0.5rem;
+  cursor: pointer;
+}
+
+.go_back a {
+  text-decoration: none;
+  color: #eee;
+}
+
 .layout {
   display: flex;
   flex-direction: column;
@@ -31,7 +46,42 @@ body {
   text-transform: uppercase;
 }
 
+.layout__heading2 {
+  flex: auto;
+}
+
+.board {
+  display: grid;
+  grid-template-columns: auto auto auto;
+  grid-template-areas: "rows grid cols";
+  align-items: center;
+  justify-items: center;
+  gap: 12px;
+}
+
+.board__diags {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.board__rows {
+  grid-area: rows;
+  display: flex;
+  flex-direction: column;
+  gap: var(--grid-gap);
+}
+
+.board__cols {
+  grid-area: cols;
+  display: flex;
+  flex-direction: column;
+  gap: var(--grid-gap);
+}
+
 .grid {
+  grid-area: grid;
   display: grid;
   grid-template-columns: repeat(3, var(--tile-size));
   grid-template-rows: repeat(3, var(--tile-size));
@@ -76,4 +126,82 @@ body {
   background: #4c6ef5;
   color: #fff;
   transform: rotateY(180deg);
+}
+
+.chooser {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.line-btn,
+.submit-btn,
+.replay-btn {
+  font: inherit;
+  cursor: pointer;
+  border-radius: 6px;
+  border: 1px solid #444;
+  background: #1e1e1e;
+  color: #eee;
+  padding: 8px 12px;
+  transition:
+    background 0.15s ease,
+    border-color 0.15s ease;
+}
+
+.line-btn:hover,
+.submit-btn:hover,
+.replay-btn:hover {
+  background: #2a2a2a;
+}
+
+.line-btn[aria-pressed="true"] {
+  background: #4c6ef5;
+  border-color: #4c6ef5;
+  color: #fff;
+}
+
+.chooser__direction {
+  display: flex;
+  gap: 8px;
+}
+
+.submit-btn {
+  background: #2f9e44;
+  border-color: #2f9e44;
+  color: #fff;
+  font-weight: 600;
+}
+
+.submit-btn:hover {
+  background: #37b24d;
+}
+
+.replay-btn {
+  background: #f08c00;
+  border-color: #f08c00;
+  color: #fff;
+  font-weight: 600;
+}
+
+.replay-btn:hover {
+  background: #f59f00;
+}
+
+.submit-btn:disabled,
+.line-btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.replay-btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.mgp_count {
+  font-size: 1.25rem;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.15em;
 }
