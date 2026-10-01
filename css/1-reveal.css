@@ -1,0 +1,79 @@
+:root {
+  --grid-gap: 8px;
+  --tile-size: 96px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  font-family: system-ui, sans-serif;
+  background: #111;
+  color: #eee;
+}
+
+.layout {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+}
+
+.layout__header {
+  margin: 0;
+  font-size: 1.5rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, var(--tile-size));
+  grid-template-rows: repeat(3, var(--tile-size));
+  gap: var(--grid-gap);
+}
+
+.tile {
+  position: relative;
+  padding: 0;
+  border: none;
+  background: none;
+  cursor: pointer;
+  perspective: 600px;
+}
+
+.tile__inner {
+  position: absolute;
+  inset: 0;
+  transform-style: preserve-3d;
+  transition: transform 0.5s ease-in;
+}
+
+.tile[aria-pressed="true"] .tile__inner {
+  transform: rotateY(180deg) rotateZ(15deg);
+}
+
+.tile__face {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  border-radius: 6px;
+  font-size: 1.75rem;
+  backface-visibility: hidden;
+}
+
+.tile__face--front {
+  background: #2a2a2a;
+}
+
+.tile__face--back {
+  background: #4c6ef5;
+  color: #fff;
+  transform: rotateY(180deg);
+}

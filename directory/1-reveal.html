@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>1 - Reveal</title>
+    <link rel="stylesheet" href="../css/1-reveal.css" />
+  </head>
+  <body>
+    <main class="layout">
+      <h1 class="layout__header">Cactpot!</h1>
+      <h2>Click on a tile to reveal~</h2>
+      <div class="grid" id="grid" aria-label="Reveal grid"></div>
+    </main>
+
+    <script>
+      //Cactpot script
+      const grid = document.getElementById("grid");
+      const tiles = [];
+      let tries = 3;
+
+      let numbers = [];
+      // generate a list of numbers
+      for (let i = 1; i < 10; i++) {
+        numbers.push(i);
+      }
+
+      console.log(numbers);
+
+      for (let i = 0; i < 9; i++) {
+        const tile = document.createElement("button");
+        tile.className = "tile";
+        tile.type = "button";
+        tile.setAttribute("aria-pressed", "false");
+        tile.setAttribute("aria-label", `Tile ${i + 1}`);
+        tile.innerHTML = `
+                <span class="tile__inner">
+                    <span class="tile__face tile__face--front">?</span>
+                    <span class="tile__face tile__face--back">${i + 1}</span>
+                </span>`;
+
+        tile.addEventListener("click", () => {
+          if (tries > 0) {
+            const revealed = tile.getAttribute("aria-pressed") === "true";
+            tile.setAttribute("aria-pressed", String("true"));
+            if (!revealed) {
+              tries--;
+            }
+          }
+        });
+
+        grid.appendChild(tile);
+        tiles.push(tile);
+      }
+
+      getTwo();
+
+      function getTwo() {
+        const picks = [...tiles].sort(() => Math.random() - 0.5).slice(0, 2);
+
+        picks.forEach((tile) => {
+          tile.setAttribute("aria-pressed", "true");
+        });
+
+        console.log(picks.map((tile) => tile.getAttribute("aria-label")));
+      }
+    </script>
+  </body>
+</html>
