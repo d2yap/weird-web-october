@@ -157,7 +157,6 @@ function setControlsEnabled(enabled) {
 function newGame() {
   tries = START_TRIES;
   triesEl.innerText = tries;
-  scoreEl.textContent = "0";
   chooser.submitted = false;
 
   tiles.length = 0;
